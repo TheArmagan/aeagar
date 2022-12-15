@@ -221,7 +221,7 @@
     const WEBSOCKET_URL = null;
     const SKIN_URL = './skins/'; // TODO: GITHUB REPO FOR SKINS HERE
     const USE_HTTPS = 'https:' === window.location.protocol;
-    const EMPTY_NAME = 'An unnamed cell';
+    const EMPTY_NAME = 'İsimsiz Oyuncu';
     const QUADTREE_MAX_POINTS = 32;
     const CELL_POINTS_MIN = 5;
     const CELL_POINTS_MAX = 120;
@@ -484,7 +484,7 @@
 
                 let name = Cell.parseName(rawName).name || EMPTY_NAME;
 
-                if (flags.server && name !== 'SERVER') name = `[SERVER] ${name}`;
+                if (flags.server && name !== 'SUNUCU') name = `[SUNUCU]`;
                 if (flags.admin) name = `[ADMIN] ${name}`;
                 if (flags.mod) name = `[MOD] ${name}`;
 
@@ -821,10 +821,10 @@
         const uptime = prettyPrintTime(stats.info.uptime);
         const rows = [
             `${stats.info.name} (${stats.info.mode})`,
-            `${stats.info.playersTotal} / ${stats.info.playersLimit} players`,
-            `${stats.info.playersAlive} playing`,
-            `${stats.info.playersSpect} spectating`,
-            `${(stats.info.update * 2.5).toFixed(1)}% load @ ${uptime}`,
+            `${stats.info.playersTotal}/${stats.info.playersLimit} aktif oyuncu`,
+            `${stats.info.playersAlive} canlı oyuncu`,
+            `${stats.info.playersSpect} izleyici`,
+            `${(stats.info.update * 2.5).toFixed(1)}% yük @ ${uptime}`,
         ];
         let width = 0;
         for (const row of rows) {
@@ -866,12 +866,12 @@
 
     function prettyPrintTime(seconds) {
         const minutes = ~~(seconds / 60);
-        if (minutes < 1) return '<1 min';
+        if (minutes < 1) return '<1 dk';
         const hours = ~~(minutes / 60);
-        if (hours < 1) return `${minutes}min`;
+        if (hours < 1) return `${minutes}dk`;
         const days = ~~(hours / 24);
-        if (days < 1) return `${hours}h`;
-        return `${days}d`;
+        if (days < 1) return `${hours}sa`;
+        return `${days}g`;
     }
 
     function drawLeaderboard() {
@@ -893,7 +893,7 @@
         ctx.globalAlpha = 1;
         ctx.fillStyle = '#FFF';
         ctx.font = '30px Ubuntu';
-        ctx.fillText('Leaderboard', 100 - ctx.measureText('Leaderboard').width / 2, 40);
+        ctx.fillText('Sıralama', 100 - ctx.measureText('Sıralama').width / 2, 40);
 
         if (leaderboard.type === 'pie') {
             let last = 0;
@@ -1130,7 +1130,7 @@
         mainCtx.textBaseline = 'top';
         if (!isNaN(stats.score)) {
             mainCtx.font = '30px Ubuntu';
-            mainCtx.fillText(`Score: ${stats.score}`, 2, height);
+            mainCtx.fillText(`Skor: ${stats.score}`, 2, height);
             height += 30;
         }
         mainCtx.font = '20px Ubuntu';
@@ -1167,7 +1167,7 @@
             mainCtx.textAlign = 'center';
             mainCtx.textBaseline = 'hanging';
             mainCtx.fillStyle = '#eea236';
-            const text = 'You are controlling a minion, press Q to switch back.';
+            const text = 'Minyon kontrol ediyorsun, Q basarak geri dönebilirsin.';
             mainCtx.fillText(text, mainCanvas.width / 2, 5);
             mainCtx.restore();
         }

@@ -38,11 +38,11 @@ module.exports = Object.seal({
   // badWordFilter: Toggle whether you enable bad word filter (set to 0 to disable)
   // serverRestart: Toggle whether you want your server to auto-restart in minutes. (set to 0 to disable)
   "serverTimeout": 300,
-  "serverMaxConnections": 500,
+  "serverMaxConnections": 4096,
   "serverPort": 6780,
   "serverBind": "0.0.0.0",
   "serverTracker": 0,
-  "serverGamemode": 2,
+  "serverGamemode": 0,
   "serverBots": 0,
   "serverViewBaseX": 2048,
   "serverViewBaseY": 2048,
@@ -64,7 +64,7 @@ module.exports = Object.seal({
   // clientBind: Only allow connections to the server from specified client (eg: http://agar.io - http://mywebsite.com - http://more.com) [Use ' - ' to seperate different websites]
   "serverMaxLB": 10,
   "serverChat": 1,
-  "serverChatAscii": 1,
+  "serverChatAscii": 0,
   "separateChatForTeams": 0,
   "serverName": "OgarBL #1",
   "serverWelcomes": [
@@ -100,7 +100,7 @@ module.exports = Object.seal({
   // foodAmount: The number of food to spawn
   // foodMassGrow: Enable food mass grow ?
   "foodMinSize": 5,
-  "foodMaxSize": 30,
+  "foodMaxSize": 10,
   "foodAmount": 8000,
   "foodMassGrow": 1,
 
@@ -159,7 +159,7 @@ module.exports = Object.seal({
   "playerMinSplitSize": 59.16079783,
   "playerMinEjectSize": 59.16079783,
   "playerStartSize": 31.6227766017,
-  "playerMaxCells": 64,
+  "playerMaxCells": 24,
   "playerSpeed": 1.5,
   "playerDecayRate": 0.002,
   "playerDecayCap": 0,

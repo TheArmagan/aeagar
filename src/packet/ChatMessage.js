@@ -17,7 +17,7 @@ class ChatMessage {
             name = this.sender._name;
             if (name == null || name.length == 0) {
                 if (this.sender.cells.length > 0)
-                    name = "An unnamed cell";
+                    name = "İsimsiz Oyuncu";
                 else
                     name = "Spectator";
             }
