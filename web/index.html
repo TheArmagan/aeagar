@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Eat cells smaller than you and don't get eaten by the bigger ones, as an MMO">
+    <meta name="keywords"
+        content="agario, agar, io, cell, cells, virus, bacteria, blob, game, games, web game, html5, fun, flash">
+    <meta name="robots" content="index, follow">
+    <meta name="viewport"
+        content="minimal-ui, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <title>OgarBL</title>
+
+    <link id="favicon" rel="icon" type="image/png" href="assets/img/favicon.png">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:700" rel="stylesheet" type="text/css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/index.css" rel="stylesheet">
+    <link href="assets/css/gallery.css" rel="stylesheet">
+
+    <script src="assets/js/quadtree.js"></script>
+    <script src="assets/js/main_out.js"></script>
+</head>
+
+<body>
+    <div id="gallery" onclick="if (event.target == this) this.hide()" style="display: none;">
+        <div id="gallery-content">
+            <div id="gallery-header">Skins</div>
+            <div id="gallery-body"></div>
+        </div>
+    </div>
+    <div id="overlays" style="display: none;">
+        <div id="helloDialog">
+            <div class="form-group">
+                <h2 id="title">OgarBL</h2>
+            </div>
+
+            <div class="form-group">
+                <input id="nick" class="form-control" placeholder="Nickname" maxlength="15">
+                <input id="skin" class="form-control" placeholder="Skin Name">
+                <select id="gamemode" class="form-control" onchange="setserver(this.value)" required>
+                    <option value="local6780.armagan.rest" selected>Normal</option>
+                    <option value="localhost:6780" selected>Local Normal</option>
+                </select>
+            </div>
+
+            <button id="play-btn" class="btn btn-play btn-primary btn-needs-server">Oyna</button>
+            <button id="spectate-btn" onclick="spectate()"
+                class="btn btn-warning btn-spectate btn-needs-server glyphicon glyphicon-eye-open"></button>
+            <button id="gallery-btn" onclick="openSkinsList()"
+                class="btn btn-play btn-primary btn-needs-server btn-info">Görünümler</button>
+
+            <div id="settings" class="checkbox">
+                <div style="margin: 6px;">
+                    <label><input id="showSkins" type="checkbox">Görünümler</label>
+                    <label><input id="showNames" type="checkbox">İsimler</label>
+                    <label><input id="darkTheme" type="checkbox">Koyu Tema</label>
+                    <label><input id="showColor" type="checkbox">Renkler</label>
+                    <label><input id="showMass" type="checkbox">Değer</label>
+                    <label><input id="showChat" type="checkbox">Sohbet</label>
+                    <label><input id="showMinimap" type="checkbox">Harita</label>
+                    <label><input id="showPosition" type="checkbox">Konum</label>
+                    <label><input id="showBorder" type="checkbox">Sınırlar</label>
+                    <label><input id="showGrid" type="checkbox">Izgara</label>
+                    <label><input id="moreZoom" type="checkbox">Uzaklaştırma</label>
+                    <label><input id="fillSkin" type="checkbox">Full Görünümler</label>
+                    <label><input id="backgroundSectors" type="checkbox">Arka Plan Sektörler</label>
+                    <label><input id="jellyPhysics" type="checkbox">Jöle Fiziği</label>
+                    <label>
+                        <input id="playSounds" type="checkbox">Sesler
+                        <input id="soundsVolume" type="range" min="0" max="1" step="any">
+                    </label>
+                </div>
+            </div>
+
+            <div id="instructions">
+                <hr>
+                <center>
+                    <span class="text-muted">
+                        Farenizi haraket ettirerek oyunu kontrol edin.<br>
+                        <b>Boşluk</b> tuşuna basarak bölünün<br>
+                        <b>W</b> tuşuna basarak yem atın<br>
+                    </span>
+                </center>
+            </div>
+
+            <hr>
+            <div id="footer">
+                <span class="text-muted">İyi eğlenceler!</span>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="connecting">
+        <div id="connecting-content">
+            <h2>Bağlanılıyor</h2>
+            <p>Sunuculara bağlanamıyorsanız, bağlantıyı engelleyen bir anti virüs veya güvenlik duvarınız olup
+                olmadığını kontrol edin.</p>
+        </div>
+    </div>
+
+    <div id="mobileStuff" style="display: none;">
+        <div id="touchpad"></div>
+        <div id="touchCircle" style="display: none;"></div>
+        <img src="./assets/img/split.png" id="splitBtn">
+        <img src="./assets/img/eject.png" id="ejectBtn">
+    </div>
+
+    <canvas id="canvas" width="800" height="600"></canvas>
+    <input type="text" id="chat_textbox" placeholder="Press enter to chat" maxlength="200">
+    <div style="font-family:'Ubuntu'">&nbsp;</div>
+</body>
+
+</html>
