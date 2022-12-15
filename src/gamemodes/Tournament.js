@@ -1,19 +1,21 @@
 var Mode = require("./Mode");
 
 class Tournament extends Mode {
-
+  #maxContenders;
   constructor() {
     super();
     this.ID = 5;
-    this.name = "Tournament";
+    this.name = "Turnuva";
     this.packetLB = 48;
-    this.IsTournament = true;
+    this.isTournament = true;
     // Config (1 tick = 1000 ms)
     this.prepTime = 5; // Amount of ticks after the server fills up to wait until starting the game
     this.endTime = 15; // Amount of ticks after someone wins to restart the game
     this.autoFill = false;
     this.autoFillPlayers = 1;
     this.dcTime = 0;
+
+    this.specByLeaderboard = true;
 
     // Gamemode Specific Variables
     this.gamePhase = 0; // 0 = Waiting for players, 1 = Prepare to start, 2 = Game in progress, 3 = End
@@ -24,6 +26,14 @@ class Tournament extends Mode {
     this.winner;
     this.timer;
     this.timeLimit = 3600 / 3;
+  }
+  set maxContenders(v) {
+    return this.#maxContenders = v;
+    // if (!this.#maxContenders) return this.#maxContenders = v;
+    // else return this.#maxContenders;
+  }
+  get maxContenders() {
+    return this.#maxContenders;
   }
 
   startGamePrep(gameServer) {
@@ -77,7 +87,7 @@ class Tournament extends Mode {
       gameServer.clients[i].close();
     }
 
-    gameServer.bots.loadNames();
+    // gameServer.bots.loadNames();
 
     // Pauses the server
     gameServer.run = false;
@@ -207,25 +217,25 @@ class Tournament extends Mode {
     gameServer.leaderboardType = this.packetLB;
     switch (this.gamePhase) {
       case 0:
-        lb[0] = "Waiting for";
-        lb[1] = "players: ";
+        lb[0] = "Bekleniyor...";
+        lb[1] = "Oyuncular: ";
         lb[2] = this.contenders.length + "/" + this.maxContenders;
         if (this.autoFill) {
           if (this.timer <= 0) {
             this.fillBots(gameServer);
           } else if (this.contenders.length >= this.autoFillPlayers) {
             lb[3] = "-----------------";
-            lb[4] = "Bots joining";
-            lb[5] = "in";
+            lb[4] = "Botlar cümbüş";
+            lb[5] = " ediyor";
             lb[6] = this.timer.toString();
             this.timer--;
           }
         }
         break;
       case 1:
-        lb[0] = "Game starting in";
+        lb[0] = "Oyun başlıyor";
         lb[1] = this.timer.toString();
-        lb[2] = "Good luck!";
+        lb[2] = "İyi şanslar!";
         if (this.timer <= 0) {
           // Reset the game
           this.startGame(gameServer);
@@ -236,9 +246,9 @@ class Tournament extends Mode {
       case 2:
         if (!this.isPlayerLb) {
           gameServer.leaderboardType = this.packetLB;
-          lb[0] = "Players Remaining";
-          lb[1] = this.contenders.length + "/" + this.maxContenders;
-          lb[2] = "Time Limit:";
+          lb[0] = "Oyuncu Lazım";
+          lb[1] = this.contenders.length + "/" + (this.maxContenders ?? 4);
+          lb[2] = "Kalan Süre:";
           lb[3] = this.formatTime(this.timeLimit);
         } else {
           this.updateLB_FFA(gameServer, lb);
@@ -257,28 +267,28 @@ class Tournament extends Mode {
         }
         break;
       case 3:
-        lb[0] = "Congratulations";
+        lb[0] = "Tebrikler!";
         lb[1] = this.winner._name;
-        lb[2] = "for winning!";
+        lb[2] = "kazandı!";
         if (this.timer <= 0) {
           // Reset the game
           this.prepare(gameServer);
           this.endGameTimeout(gameServer);
         } else {
           lb[3] = "-----------------";
-          lb[4] = "Game restarting in";
+          lb[4] = "Oyun yenileniyor";
           lb[5] = this.timer.toString();
           this.timer--;
         }
         break;
       case 4:
-        lb[0] = "Time Limit";
-        lb[1] = "Reached!";
+        lb[0] = "Zaman";
+        lb[1] = "Doldu!";
         if (this.timer <= 0) {
           // Reset the game
           this.onServerInit(gameServer);
         } else {
-          lb[2] = "Game restarting in";
+          lb[2] = "Oyun yenileniyor";
           lb[3] = this.timer.toString();
           this.timer--;
         }

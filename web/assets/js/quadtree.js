@@ -1,4 +1,4 @@
-window.PointQuadTree = (function() {
+window.PointQuadTree = (function () {
     "use strict";
 
     var GROWTH = 1.1;

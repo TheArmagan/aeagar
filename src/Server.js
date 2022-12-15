@@ -494,6 +494,8 @@ class Server {
             this.mode.onTick(this);
             this.ticks++;
         }
+        if (!this.run && this.mode.isTournament)
+            this.ticks++;
         this.updateClients();
         // update leaderboard
         if (((this.ticks + 7) % 25) === 0)

@@ -41,7 +41,7 @@ class EjectEat extends Mode {
     }
 
     onEjectVelocity(cell, client) {
-        return ((40 * (cell._mass / 300)) + 720) * (Math.random() * 0.7 + 0.3)
+        return Math.min(3000,(100 * (cell._mass / 300)) + 720) * (Math.random() * 0.7 + 0.3)
     }
 }
 

@@ -9,8 +9,8 @@ const MinionPlayer = require('./MinionPlayer');
 
 const botnameFile = "./ai/botnames.txt";
 let botnames = null;
-if(fs.existsSync(botnameFile))
-    botnames = fs.readFileSync(botnameFile, "utf-8").split("\n");
+if (fs.existsSync(botnameFile))
+    botnames = fs.readFileSync(botnameFile, "utf-8").split("\n").map(x => x.trim());
 
 class BotLoader {
     constructor(server) {

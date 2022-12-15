@@ -38,11 +38,11 @@ module.exports = Object.seal({
   // badWordFilter: Toggle whether you enable bad word filter (set to 0 to disable)
   // serverRestart: Toggle whether you want your server to auto-restart in minutes. (set to 0 to disable)
   "serverTimeout": 300,
-  "serverMaxConnections": 4096,
+  "serverMaxConnections": 300,
   "serverPort": 6780,
   "serverBind": "0.0.0.0",
   "serverTracker": 0,
-  "serverGamemode": 0,
+  "serverGamemode": 4,
   "serverBots": 0,
   "serverViewBaseX": 2048,
   "serverViewBaseY": 2048,
@@ -50,7 +50,7 @@ module.exports = Object.seal({
   "serverSpectatorScale": 0.4,
   "serverStatsPort": 6779,
   "serverStatsUpdate": 10,
-  "mobilePhysics": 0,
+  "mobilePhysics": 1,
   "badWordFilter": 1,
   "serverRestart": 0,
 
@@ -82,7 +82,7 @@ module.exports = Object.seal({
   // serverMinionInterval: minion detection interval [milliseconds]
   // serverScrambleLevel: Toggles scrambling of coordinates. 0: No scrambling, 1: lightweight scrambling. 2: full scrambling (also known as scramble minimap), 3 - high level scrambling (no border)
   // playerBotGrow: Cells greater than 625 mass cannot grow from players under 17 mass (set to 1 to disable)
-  "serverIpLimit": 4,
+  "serverIpLimit": 300,
   "serverMinionIgnoreTime": 30,
   "serverMinionThreshold": 10,
   "serverMinionInterval": 1000,
@@ -186,4 +186,16 @@ module.exports = Object.seal({
   // [Gamemode]
   // Custom gamemode settings
 
+  // [Tourney]
+  // tourneyTimeLimit: Time limit of the game, in minutes.
+  // tourneyAutoFill: If set to a value higher than 0, the tournament match will automatically fill up with bots after value seconds
+  // tourneyAutoFillPlayers: The timer for filling the server with bots will not count down unless there is this amount of real players
+  // tourneyLeaderboardToggle Time for toggling the leaderboard, in seconds. If value set to 0, leaderboard will not toggle.
+  "tourneyMaxPlayers": 4,
+  "tourneyAutoFill": 0,
+  "tourneyAutoFillPlayers": 1,
+  "tourneyPrepTime": 10,
+  "tourneyEndTime": 30,
+  "tourneyTimeLimit": 20,
+  "tourneyLeaderboardToggleTime": 0
 })

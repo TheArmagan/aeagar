@@ -10,7 +10,7 @@
     "ws": "^7.4.0"
   },
   "scripts": {
-    "start:game": "cd src && node index",
+    "start:game": "node src",
     "start:web": "cd web && npx http-server -p 6680 -c-1"
   },
   "repository": {
