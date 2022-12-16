@@ -84,12 +84,13 @@ class Client {
         const tick = this.server.ticks;
         const dt = tick - this.lastJoinTick;
         this.lastJoinTick = tick;
-        // if (dt < 25 || this.socket.player.cells.length !== 0) return;
+        if (dt < 25) return;
         var reader = new BinaryReader(message);
         reader.skipBytes(1);
         var text = null;
         if (this.protocol < 6) text = reader.readStringZeroUnicode();
         else text = reader.readStringZeroUtf8();
+        if (this.__nickname == text) return;
         this.setNickname(text);
     }
     message_onSpectate(message) {
@@ -194,6 +195,7 @@ class Client {
         return '';
     }
     setNickname(text) {
+        this.__nickname = text;
         var name = "", skin = null;
         if (text != null && text.length > 0) {
             var skinName = null, userName = text, n = -1;

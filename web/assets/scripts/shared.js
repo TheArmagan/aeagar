@@ -5,11 +5,12 @@ export let shared = {
     mouseX: 0,
     mouseY: 0,
     isTyping: false,
-    skin: "",
-    name: "",
+    skin: "4DXvCFs",
+    name: "İsimsiz Oyuncu",
     quadTree: null,
     pressedKeys: new Set(),
-    minionControlled: false
+    minionControlled: false,
+    lastPlayAt: 0
   },
   cells: {
     list: [],

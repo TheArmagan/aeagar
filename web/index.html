@@ -15,11 +15,24 @@
     <canvas></canvas>
     <div id="app">
         <div id="wrapper">
-            <input class="chat-text-box" type="text" autocomplete="off" placeholder="Sohbet.." @blur="onChatBlur"
-                @focus="onChatFocus" @keydown="onChatKeyDown" maxlength="200" />
+            <input class="chat-text-box" type="text" autocomplete="off" spellcheck="false" placeholder="Sohbet.."
+                @blur="onChatBlur" @focus="onChatFocus" @keydown="onChatKeyDown" maxlength="200" />
             <div class="backdrop-content" :class="{'visible': isESCOverlayVisible}">
-                <div class="content">
-
+                <div class="centered">
+                    <div class="modal main-modal">
+                        <div class="skin-container"
+                            :style="`background-image: url('https://i.imgur.com/${skin}.png');`">
+                            <input type="text" v-model="skin" maxlength="7" placeholder="Skin Code" spellcheck="false"
+                                autocomplete="off">
+                        </div>
+                        <div class="content">
+                            <input class="name-input" type="text" v-model="name" autocomplete="off" spellcheck="false">
+                            <div class="button-container">
+                                <button class="play-button" @click="onPlay">Oyna</button>
+                                <button class="spectate-button" @click="onSpectate">İzle</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

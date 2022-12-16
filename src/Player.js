@@ -115,7 +115,7 @@ class Player {
     }
     joinGame(name, skin) {
         var client = this.socket.client;
-        if (!name) name = "";
+        name = name || "";
         if (this.cells.length) {
             this.setSkin(skin);
             this.setName(name);

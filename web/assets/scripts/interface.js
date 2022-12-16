@@ -5,12 +5,14 @@ import { drawChat } from "./game.js";
 import { shared } from "./shared.js";
 const { camera, border, cells, chat, leaderBoard, stats, other, settings } = shared;
 
-let internalVueApp;
+export let internalVueApp;
 export const vueApp = Vue.createApp({
   data() {
     return {
       shared,
-      isESCOverlayVisible: false
+      isESCOverlayVisible: true,
+      skin: shared.other.skin,
+      name: shared.other.name
     }
   },
   methods: {
@@ -29,6 +31,7 @@ export const vueApp = Vue.createApp({
       }
     },
     onKeyDown(e) {
+      if (e.code == "Escape") this.isESCOverlayVisible = !this.isESCOverlayVisible;
       if (!this.isESCOverlayVisible) onKeyDown(e);
     },
     onKeyUp(e) {
@@ -36,6 +39,24 @@ export const vueApp = Vue.createApp({
     },
     onWheel(e) {
       if (!this.isESCOverlayVisible) onWheel(e);
+    },
+    onPlay() {
+      other.lastPlayAt = Date.now();
+      connection.sendPlay(`<${this.skin}>${this.name}`);
+      this.isESCOverlayVisible = false;
+    },
+    onSpectate() {
+      other.lastPlayAt = Date.now();
+      connection.sendSpectate();
+      this.isESCOverlayVisible = false;
+    }
+  },
+  watch: {
+    name(v) {
+      shared.other.name = v;
+    },
+    skin(v) {
+      shared.other.skin = v;
     }
   },
   mounted() {
@@ -44,15 +65,18 @@ export const vueApp = Vue.createApp({
     window.addEventListener("mousemove", (e) => {
       other.mouseX = e.x;
       other.mouseY = e.y;
-    })
+    });
+
     window.addEventListener("keydown", (e) => {
       other.pressedKeys.add(e.code);
       this.onKeyDown(e);
     });
+
     window.addEventListener("keyup", (e) => {
       other.pressedKeys.delete(e.code);
       this.onKeyUp(e);
     });
+
     window.addEventListener("wheel", (e) => {
       this.onWheel(e);
     }, { passive: true });

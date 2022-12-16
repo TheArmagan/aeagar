@@ -1,11 +1,14 @@
 import { sendMouseMove, send } from "./connection.js";
 import { KEY_TO_OPCODE, UINT8_CACHE } from "./constants.js";
 import { mainCanvas } from "./game.js";
+import { internalVueApp } from "./interface.js";
 import { shared } from "./shared.js";
 const { camera, border, cells, chat, leaderBoard, stats, other, settings } = shared;
 
 export function onDie() {
-
+  console.log(cells.mine)
+  if (!(Date.now() - other.lastPlayAt > 1000)) internalVueApp.isESCOverlayVisible = true;
+  console.log("onDie");
 }
 
 let wInterval;
@@ -27,7 +30,6 @@ export function onKeyDown(e) {
       if (!wInterval) wInterval = setInterval(() => send(UINT8_CACHE[other.minionControlled ? 23 : 21]), 1000 / 10);
     }
   }
-  // send(UINT8_CACHE[other.minionControlled ? 23 : 21]);
 }
 
 

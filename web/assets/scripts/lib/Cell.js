@@ -45,7 +45,11 @@ export class Cell {
   }
   destroy(killerId) {
     cells.byId.delete(this.id);
-    if (cells.mine.remove(this.id) && cells.mine.length === 0) onDie(this);
+    if (cells.mine.remove(this.id)) {
+      setTimeout(() => {
+        if (!cells.mine.length) onDie(this);
+      }, 100)
+    }
     this.destroyed = true;
     this.dead = other.syncUpdStamp;
     if (killerId && !this.diedBy) {
