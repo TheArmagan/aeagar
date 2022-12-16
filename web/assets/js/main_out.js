@@ -410,25 +410,25 @@
                 break;
             }
             case 0x30: { // text list
-                leaderboard.items = [];
-                leaderboard.type = 'text';
+                leaderBoard.items = [];
+                leaderBoard.type = 'text';
 
                 const lbCount = reader.getUint32();
                 for (let i = 0; i < lbCount; ++i) {
-                    leaderboard.items.push(reader.getStringUTF8());
+                    leaderBoard.items.push(reader.getStringUTF8());
                 }
                 drawLeaderboard();
                 break;
             }
             case 0x31: { // ffa list
-                leaderboard.items = [];
-                leaderboard.type = 'ffa';
+                leaderBoard.items = [];
+                leaderBoard.type = 'ffa';
 
                 const count = reader.getUint32();
                 for (let i = 0; i < count; ++i) {
                     const isMe = !!reader.getUint32();
                     const lbName = reader.getStringUTF8();
-                    leaderboard.items.push({
+                    leaderBoard.items.push({
                         me: isMe,
                         name: Cell.parseName(lbName).name || EMPTY_NAME
                     });
@@ -437,12 +437,12 @@
                 break;
             }
             case 0x32: { // pie chart
-                leaderboard.items = [];
-                leaderboard.type = 'pie';
+                leaderBoard.items = [];
+                leaderBoard.type = 'pie';
 
                 const teamsCount = reader.getUint32();
                 for (let i = 0; i < teamsCount; ++i) {
-                    leaderboard.items.push(reader.getFloat32());
+                    leaderBoard.items.push(reader.getFloat32());
                 }
                 drawLeaderboard();
                 break;
@@ -539,11 +539,11 @@
     function gameReset() {
         cleanupObject(cells);
         cleanupObject(border);
-        cleanupObject(leaderboard);
+        cleanupObject(leaderBoard);
         cleanupObject(chat);
         cleanupObject(stats);
         chat.messages = [];
-        leaderboard.items = [];
+        leaderBoard.items = [];
         cells.mine = [];
         cells.byId = new Map();
         cells.list = [];
@@ -569,7 +569,7 @@
         centerX: -1,
         centerY: -1
     };
-    const leaderboard = Object.create({
+    const leaderBoard = Object.create({
         type: null,
         items: null,
         canvas: document.createElement('canvas'),
@@ -875,16 +875,16 @@
     }
 
     function drawLeaderboard() {
-        if (leaderboard.type === null) return leaderboard.visible = false;
-        if (!settings.showNames || leaderboard.items.length === 0) {
-            return leaderboard.visible = false;
+        if (leaderBoard.type === null) return leaderBoard.visible = false;
+        if (!settings.showNames || leaderBoard.items.length === 0) {
+            return leaderBoard.visible = false;
         }
-        leaderboard.visible = true;
-        const canvas = leaderboard.canvas;
+        leaderBoard.visible = true;
+        const canvas = leaderBoard.canvas;
         const ctx = canvas.getContext('2d');
 
         canvas.width = 200;
-        canvas.height = leaderboard.type !== 'pie' ? 60 + 24 * leaderboard.items.length : 240;
+        canvas.height = leaderBoard.type !== 'pie' ? 60 + 24 * leaderBoard.items.length : 240;
 
         ctx.globalAlpha = .4;
         ctx.fillStyle = '#000';
@@ -895,28 +895,28 @@
         ctx.font = '30px Ubuntu';
         ctx.fillText('Sıralama', 100 - ctx.measureText('Sıralama').width / 2, 40);
 
-        if (leaderboard.type === 'pie') {
+        if (leaderBoard.type === 'pie') {
             let last = 0;
-            for (let i = 0; i < leaderboard.items.length; i++) {
-                ctx.fillStyle = leaderboard.teams[i];
+            for (let i = 0; i < leaderBoard.items.length; i++) {
+                ctx.fillStyle = leaderBoard.teams[i];
                 ctx.beginPath();
                 ctx.moveTo(100, 140);
-                ctx.arc(100, 140, 80, last, (last += leaderboard.items[i] * PI_2), false);
+                ctx.arc(100, 140, 80, last, (last += leaderBoard.items[i] * PI_2), false);
                 ctx.closePath();
                 ctx.fill();
             }
         } else {
             ctx.font = '20px Ubuntu';
-            for (let i = 0; i < leaderboard.items.length; i++) {
+            for (let i = 0; i < leaderBoard.items.length; i++) {
                 let isMe = false;
                 let text;
-                if (leaderboard.type === "text") {
-                    text = leaderboard.items[i];
+                if (leaderBoard.type === "text") {
+                    text = leaderBoard.items[i];
                 } else {
-                    text = leaderboard.items[i].name,
-                        isMe = leaderboard.items[i].me;
+                    text = leaderBoard.items[i].name,
+                        isMe = leaderBoard.items[i].me;
                 }
-                if (leaderboard.type === 'ffa') text = `${i + 1}. ${text}`;
+                if (leaderBoard.type === 'ffa') text = `${i + 1}. ${text}`;
                 ctx.fillStyle = isMe ? '#FAA' : '#FFF';
                 const width = ctx.measureText(text).width;
                 const start = width > 200 ? 2 : 100 - width * 0.5;
@@ -1052,7 +1052,6 @@
 
         mainCtx.restore();
     }
-
     function drawBorders() {
         if (!settings.showBorder) return;
         mainCtx.strokeStyle = '#0000ff';
@@ -1141,10 +1140,10 @@
         if (stats.visible) {
             mainCtx.drawImage(stats.canvas, 2, height);
         }
-        if (leaderboard.visible) {
+        if (leaderBoard.visible) {
             mainCtx.drawImage(
-                leaderboard.canvas,
-                mainCanvas.width / camera.viewportScale - 10 - leaderboard.canvas.width,
+                leaderBoard.canvas,
+                mainCanvas.width / camera.viewportScale - 10 - leaderBoard.canvas.width,
                 10);
         }
         if (settings.showChat && (chat.visible || isTyping)) {
@@ -1218,7 +1217,7 @@
         return (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y);
     }
     function updateQuadtree() {
-        const w = 1920 / camera.sizeScale;
+        const w = 2048 / camera.sizeScale;
         const h = 1080 / camera.sizeScale;
         const x = (camera.x - w / 2);
         const y = (camera.y - h / 2);

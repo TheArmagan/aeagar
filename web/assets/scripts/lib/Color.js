@@ -7,18 +7,19 @@ export class Color {
     const v = parseInt(hex, 16);
     return new Color(v >>> 16 & 255, v >>> 8 & 255, v & 255, `#${hex}`);
   }
+  hexCache = "";
   constructor(r, g, b, hex) {
     this.r = r;
     this.g = g;
     this.b = b;
-    this.#hex = hex;
+    this.hexCache = hex;
   }
   clone() {
     return new Color(this.r, this.g, this.b);
   }
   toHex() {
-    if (this.#hex) return this.#hex;
-    return this.#hex = `#${(1 << 24 | this.r << 16 | this.g << 8 | this.b).toString(16).slice(1)}`;
+    if (this.hexCache) return this.hexCache;
+    return this.hexCache = `#${(1 << 24 | this.r << 16 | this.g << 8 | this.b).toString(16).slice(1)}`;
   }
   darken(grade = 1) {
     grade /= 10;

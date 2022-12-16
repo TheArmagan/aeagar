@@ -7,13 +7,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>æAgar</title>
     <link rel="stylesheet" href="/assets/styles/style.css">
+    <link id="favicon" rel="icon" type="image/png" href="assets/img/favicon.png">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:700" rel="stylesheet" type="text/css">
 </head>
 
 <body>
     <canvas></canvas>
     <div id="app">
-        <button @click="count += 1">{{count}}</button>
+        <div id="wrapper" @mousemove="onMouseMove">
+            <input class="chat-text-box" type="text" autocomplete="off" placeholder="Sohbet.." @blur="onChatBlur"
+                @focus="onChatFocus" @keydown="onChatKeyDown" maxlength="200" />
+            <div class="backdrop-content">
+
+            </div>
+        </div>
     </div>
+    <script>
+        Array.prototype.remove = function (a) {
+            const i = this.indexOf(a);
+            return i !== -1 && this.splice(i, 1);
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <script src="/assets/scripts/index.js" type="module"></script>
 </body>
 

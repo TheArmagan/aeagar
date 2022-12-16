@@ -1,5 +1,6 @@
 export const USE_HTTPS = 'https:' === window.location.protocol;
 export const EMPTY_NAME = 'İsimsiz Oyuncu';
+export const SKIN_URL = "./skins/"
 export const QUAD_TREE_MAX_POINTS = 32;
 export const CELL_POINTS_MIN = 5;
 export const CELL_POINTS_MAX = 120;
