@@ -157,6 +157,7 @@ export class Cell {
     this.setSkin(skin);
   }
   setSkin(value) {
+    if (other.blackListedSkins.includes(value)) return;
     this.skin = (value || "").trim();
     if (!this.skin) return;
     if (loadedSkins.has(this.skin)) return;

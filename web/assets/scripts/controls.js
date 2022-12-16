@@ -45,7 +45,7 @@ export function onKeyUp(e) {
 export function onWheel(e) {
   camera.userZoom *= e.deltaY > 0 ? 0.8 : 1.2;
   camera.userZoom = Math.max(camera.userZoom, settings.moreZoom ? 0.05 : 1);
-  camera.userZoom = Math.min(camera.userZoom, 6);
+  camera.userZoom = Math.min(camera.userZoom, 4 );
 }
 
 setInterval(() => {

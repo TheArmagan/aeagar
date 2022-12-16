@@ -10,7 +10,10 @@ export let shared = {
     quadTree: null,
     pressedKeys: new Set(),
     minionControlled: false,
-    lastPlayAt: 0
+    lastPlayAt: 0,
+    blackListedSkins: [
+      "13231"
+    ]
   },
   cells: {
     list: [],
@@ -76,7 +79,7 @@ export let shared = {
     showBorder: true,
     showGrid: true,
     moreZoom: true,
-    fillSkin: true,
+    fillSkin: false,
     jellyPhysics: true,
   }
 };

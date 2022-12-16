@@ -29,7 +29,7 @@ module.exports = {
   // serverTracker: Set to 1 if you want to show your server on the tracker http://ogar.mivabe.nl/master (check that your server port is opened for external connections first!)
   // serverGamemode: Gamemodes: 0: FFA, 1: Teams, 2: Experimental, 3: Rainbow
   // serverBots: Number of player bots to spawn (Experimental)
-  // serverViewBase: Base view distance of players. Warning: high values may cause lag! Min value is 1920x1080
+  // serverViewBase: Base view distance of players. Warning: high values may cause lag! Min value is 1920x1920
   // serverMinScale: Minimum viewbox scale for player (low value leads to lags due to large visible area for big cell)
   // serverSpectatorScale: Scale (field of view) used for free roam spectators (low value leads to lag, vanilla: 0.4, old vanilla: 0.25)
   // serverStatsPort: Port for the stats server. Having a negative number will disable the stats server.
@@ -44,14 +44,14 @@ module.exports = {
   "serverTracker": 0,
   "serverGamemode": 0,
   "serverBots": 0,
-  "serverViewBaseX": 1080,
+  "serverViewBaseX": 1920,
   "serverViewBaseY": 1080,
   "serverMinScale": 0.15,
   "serverSpectatorScale": 0.4,
   "serverStatsPort": 6779,
   "serverStatsUpdate": 10,
   "mobilePhysics": 1,
-  "badWordFilter": 1,
+  "badWordFilter": 0,
   "serverRestart": 0,
 
   // [CLIENT]
@@ -91,17 +91,17 @@ module.exports = {
 
   // [BORDER]
   // Border size (vanilla 14142.135623730952)
-  "borderWidth": 14142.135623730952,
-  "borderHeight": 14142.135623730952,
+  "borderWidth": 32000,
+  "borderHeight": 32000,
 
   // [FOOD]
   // foodMinSize: vanilla 10 (mass: 10*10/100: 1 mass)
   // foodMaxSize: vanilla 20 (mass: 20*20/100: 4 mass)
   // foodAmount: The number of food to spawn
   // foodMassGrow: Enable food mass grow ?
-  "foodMinSize": 5,
+  "foodMinSize": 10,
   "foodMaxSize": 20,
-  "foodAmount": 8000,
+  "foodAmount": 12000,
   "foodMassGrow": 1,
 
   // [VIRUSES]
@@ -114,11 +114,11 @@ module.exports = {
   // motherCellMaxMass: Maximum amount of mass a mothercell is allowed to have (0 for no limit)
   // virusVelocity: Velocity of moving viruses (speed and distance)
   // virusMaxCells: Maximum cells a player is allowed to have from virus splits (0 for playerMaxCells)
-  "virusMinSize": 100,
-  "virusMaxSize": 141.421356237,
+  "virusMinSize": 60,
+  "virusMaxSize": 100,
   "virusMaxPoppedSize": 60,
-  "virusEqualPopSize": 0,
-  "virusAmount": 50,
+  "virusEqualPopSize": 1,
+  "virusAmount": 20,
   "virusMaxAmount": 100,
   "motherCellMaxMass": 0,
   "virusVelocity": 780,
@@ -136,7 +136,7 @@ module.exports = {
   "ejectCooldown": 3,
   "ejectSpawnPercent": 0.5,
   "ejectVirus": 0,
-  "ejectVelocity": 780,
+  "ejectVelocity": 1400,
 
   // [PLAYERS]
   // Reminder: MultiOgarII uses cell size instead of mass!
@@ -154,11 +154,11 @@ module.exports = {
   // playerDecayCap: Maximum mass a cell can have before it's decayrate multiplies by 10. (0 to disable)
   // playerDisconnectTime: Time in seconds before a disconnected player's cell is removed from the server (Set to -1 to never remove)
   // splitVelocity: Velocity of splitting playercells (speed and distance)
-  "playerMinSize": 31.6227766017,
+  "playerMinSize": 50,
   "playerMaxSize": 135000,
-  "playerMinSplitSize": 59.16079783,
-  "playerMinEjectSize": 59.16079783,
-  "playerStartSize": 31.6227766017,
+  "playerMinSplitSize": 35,
+  "playerMinEjectSize": 35,
+  "playerStartSize": 100,
   "playerMaxCells": 16,
   "playerSpeed": 3,
   "playerDecayRate": 0.002,

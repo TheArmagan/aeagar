@@ -1129,7 +1129,7 @@
         for (const cell of drawList) {
             let distance = vec2Distance(cell.x, cell.y, camera.x, camera.y);
 
-            if ((distance < ((1080 / __scale / 2))) || cells.mine.includes(cell.id)) cell.draw(mainCtx);
+            if ((distance < ((1920 / __scale / 2))) || cells.mine.includes(cell.id)) cell.draw(mainCtx);
             // console.log(stats.scale)
         }
 
@@ -1230,8 +1230,8 @@
         return (a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y);
     }
     function updateQuadtree() {
-        const w = 1080 / camera.sizeScale;
-        const h = 1080 / camera.sizeScale;
+        const w = 1920 / camera.sizeScale;
+        const h = 1920 / camera.sizeScale;
         const x = (camera.x - w / 2);
         const y = (camera.y - h / 2);
         quadtree = new window.PointQuadTree(x, y, w, h, QUADTREE_MAX_POINTS);
@@ -1709,7 +1709,7 @@
         window.onresize = () => {
             const width = mainCanvas.width = window.innerWidth;
             const height = mainCanvas.height = window.innerHeight;
-            camera.viewportScale = Math.max(width / 1920, height / 1080);
+            camera.viewportScale = Math.max(width / 1920, height / 1920);
         };
         window.onresize();
         const mobileStuff = byId('mobileStuff');

@@ -527,10 +527,11 @@ function drawGame() {
   drawBorders();
   let __scale = getLivingScale();
   for (const cell of drawList) {
-    let distance = vec2Distance(cell.x, cell.y, camera.x, camera.y);
+    // let distance = vec2Distance(cell.x, cell.y, camera.x, camera.y);
 
-    if (cells.mine.includes(cell.id) || (distance < ((1080 / __scale / 2)))) cell.draw(mainCtx);
+    // if (cells.mine.includes(cell.id) || (distance < ((1920 / __scale / 2)))) cell.draw(mainCtx);
     // console.log(stats.scale)
+    cell.draw(mainCtx);
   }
 
   fromCamera(mainCtx);
@@ -628,7 +629,7 @@ function cameraUpdate() {
 
 export function updateQuadTree() {
   const w = 1920 / camera.sizeScale;
-  const h = 1080 / camera.sizeScale;
+  const h = 1920 / camera.sizeScale;
   const x = (camera.x - w / 2);
   const y = (camera.y - h / 2);
   other.quadTree = new PointQuadTree(x, y, w, h, QUAD_TREE_MAX_POINTS);
@@ -640,6 +641,6 @@ export function updateQuadTree() {
 window.onresize = () => {
   const width = mainCanvas.width = window.innerWidth;
   const height = mainCanvas.height = window.innerHeight;
-  camera.viewportScale = Math.max(width / 1920, height / 1080);
+  camera.viewportScale = Math.max(width / 1920, height / 1920);
 };
 window.onresize();

@@ -29,8 +29,12 @@ export const vueApp = Vue.createApp({
         connection.sendChat(e.target.value);
         e.target.value = "";
       }
+      if (e.code == "Escape") {
+        document.querySelector(".chat-input").blur();
+      }
     },
     onKeyDown(e) {
+      if (other.isTyping) return;
       if (e.code == "Escape") this.isESCOverlayVisible = !this.isESCOverlayVisible;
       if (!this.isESCOverlayVisible) {
         onKeyDown(e);

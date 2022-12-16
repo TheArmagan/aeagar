@@ -21,7 +21,7 @@
 
 function checkAlloc(writer, size) {
     let needed = writer._length + size;
-    let chunk = Math.max(Buffer.poolSize / 2, 1080);
+    let chunk = Math.max(Buffer.poolSize / 2, 1920);
     let chunkCount = (needed / chunk) >>> 0;
 
     if (writer._buffer.length >= needed)
