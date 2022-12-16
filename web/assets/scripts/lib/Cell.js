@@ -1,4 +1,5 @@
 import { CELL_POINTS_MAX, CELL_POINTS_MIN, PI_2, SKIN_URL, VIRUS_POINTS } from "../constants.js";
+import { onDie } from "../controls.js";
 import { drawText } from "../game.js";
 import { shared } from "../shared.js";
 import { Color } from "./Color.js";
@@ -44,7 +45,7 @@ export class Cell {
   }
   destroy(killerId) {
     cells.byId.delete(this.id);
-    if (cells.mine.remove(this.id) && cells.mine.length === 0) showESCOverlay();
+    if (cells.mine.remove(this.id) && cells.mine.length === 0) onDie(this);
     this.destroyed = true;
     this.dead = other.syncUpdStamp;
     if (killerId && !this.diedBy) {
@@ -152,9 +153,9 @@ export class Cell {
     this.setSkin(skin);
   }
   setSkin(value) {
-    this.skin = (value && value[0] === '%' ? value.slice(1) : value) || this.skin;
-    if (!this.skin || loadedSkins.has(this.skin)) return;
-    this.skin = value;
+    this.skin = (value || "").trim();
+    if (!this.skin) return;
+    if (loadedSkins.has(this.skin)) return;
     const skin = new Image();
     skin.src = `${SKIN_URL}${this.skin}.png`;
     loadedSkins.set(this.skin, skin);

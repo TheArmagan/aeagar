@@ -31,7 +31,7 @@ canvas {
   .chat-text-box {
     transition: all 0.3s ease-in-out;
     position: absolute;
-    z-index: 1;
+    z-index: 2;
     bottom: 10px;
     opacity: 0.5;
     background: rgba(0, 0, 0, 0.5);
@@ -51,6 +51,23 @@ canvas {
 
     &:focus {
       opacity: 1;
+    }
+  }
+
+  .backdrop-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: 100ms all ease-in-out;
+    width: 100vw;
+    height: 100vh;
+
+    &.visible {
+      opacity: 1;
+      pointer-events: all !important;
     }
   }
 }

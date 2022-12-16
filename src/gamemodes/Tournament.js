@@ -6,7 +6,7 @@ class Tournament extends Mode {
     super();
     this.ID = 5;
     this.name = "Turnuva";
-    this.packetLB = 48;
+    this.packetLB = 0x30;
     this.isTournament = true;
     // Config (1 tick = 1000 ms)
     this.prepTime = 5; // Amount of ticks after the server fills up to wait until starting the game
@@ -224,7 +224,7 @@ class Tournament extends Mode {
           if (this.timer <= 0) {
             this.fillBots(gameServer);
           } else if (this.contenders.length >= this.autoFillPlayers) {
-            lb[3] = "-----------------";
+            lb[3] = ["-----------------", "000"];
             lb[4] = "Botlar cümbüş";
             lb[5] = " ediyor";
             lb[6] = this.timer.toString();
@@ -235,7 +235,7 @@ class Tournament extends Mode {
       case 1:
         lb[0] = "Oyun başlıyor";
         lb[1] = this.timer.toString();
-        lb[2] = "İyi şanslar!";
+        lb[2] = ["İyi şanslar!", "0f0"];
         if (this.timer <= 0) {
           // Reset the game
           this.startGame(gameServer);
@@ -275,7 +275,7 @@ class Tournament extends Mode {
           this.prepare(gameServer);
           this.endGameTimeout(gameServer);
         } else {
-          lb[3] = "-----------------";
+          lb[3] = ["-----------------", "000"];
           lb[4] = "Oyun yenileniyor";
           lb[5] = this.timer.toString();
           this.timer--;

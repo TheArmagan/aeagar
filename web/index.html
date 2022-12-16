@@ -14,11 +14,13 @@
 <body>
     <canvas></canvas>
     <div id="app">
-        <div id="wrapper" @mousemove="onMouseMove">
+        <div id="wrapper">
             <input class="chat-text-box" type="text" autocomplete="off" placeholder="Sohbet.." @blur="onChatBlur"
                 @focus="onChatFocus" @keydown="onChatKeyDown" maxlength="200" />
-            <div class="backdrop-content">
+            <div class="backdrop-content" :class="{'visible': isESCOverlayVisible}">
+                <div class="content">
 
+                </div>
             </div>
         </div>
     </div>

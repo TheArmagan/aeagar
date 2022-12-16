@@ -7,7 +7,9 @@ export let shared = {
     isTyping: false,
     skin: "",
     name: "",
-    quadTree: null
+    quadTree: null,
+    pressedKeys: new Set(),
+    minionControlled: false
   },
   cells: {
     list: [],

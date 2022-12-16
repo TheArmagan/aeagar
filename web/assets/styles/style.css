@@ -34,7 +34,7 @@ canvas {
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   bottom: 10px;
   opacity: 0.5;
   background: rgba(0, 0, 0, 0.5);
@@ -55,5 +55,29 @@ canvas {
 
 #wrapper .chat-text-box:focus {
   opacity: 1;
+}
+
+#wrapper .backdrop-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  -webkit-transition: 100ms all ease-in-out;
+  transition: 100ms all ease-in-out;
+  width: 100vw;
+  height: 100vh;
+}
+
+#wrapper .backdrop-content.visible {
+  opacity: 1;
+  pointer-events: all !important;
 }
 /*# sourceMappingURL=style.css.map */

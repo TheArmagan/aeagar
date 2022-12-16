@@ -84,7 +84,7 @@ class Client {
         const tick = this.server.ticks;
         const dt = tick - this.lastJoinTick;
         this.lastJoinTick = tick;
-        if (dt < 25 || this.socket.player.cells.length !== 0) return;
+        // if (dt < 25 || this.socket.player.cells.length !== 0) return;
         var reader = new BinaryReader(message);
         reader.skipBytes(1);
         var text = null;
@@ -211,7 +211,7 @@ class Client {
             name = name.substring(0, this.server.config.playerMaxNickLength);
         if (this.server.checkBadWord(name)) {
             skin = null;
-            name = "Hi there!";
+            name = "";
         }
         this.socket.player.joinGame(name, skin);
     }

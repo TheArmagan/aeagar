@@ -1,4 +1,5 @@
 import { listeners } from "./connection.js";
+import { EMPTY_NAME } from "./constants.js";
 import { drawChat, drawLeaderBoard, drawStats } from "./game.js";
 import { Cell } from "./lib/Cell.js";
 import { Color } from "./lib/Color.js";
@@ -112,7 +113,7 @@ listeners.set(
 
     const lbCount = reader.getUint32();
     for (let i = 0; i < lbCount; ++i) {
-      leaderBoard.items.push(reader.getStringUTF8());
+      leaderBoard.items.push(JSON.parse(reader.getStringUTF8()));
     }
     drawLeaderBoard();
   }
@@ -138,7 +139,7 @@ listeners.set(
 )
 
 listeners.set(
-  0x31,
+  0x32,
   (reader) => {
     leaderBoard.items = [];
     leaderBoard.type = 'pie';
@@ -150,7 +151,8 @@ listeners.set(
     drawLeaderBoard();
   }
 )
-let mapCenterSet = false;
+
+
 listeners.set(
   0x40,
   (reader, rawData) => {
@@ -163,12 +165,9 @@ listeners.set(
     border.centerX = (border.left + border.right) / 2;
     border.centerY = (border.top + border.bottom) / 2;
     if (rawData.byteLength === 33) return;
-    if (!mapCenterSet) {
-      mapCenterSet = true;
-      camera.x = camera.target.x = border.centerX;
-      camera.y = camera.target.y = border.centerY;
-      camera.scale = camera.target.scale = 1;
-    }
+    camera.x = camera.target.x = border.centerX;
+    camera.y = camera.target.y = border.centerY;
+    camera.scale = camera.target.scale = 1;
     reader.getUint32(); // game type
     // if (!/MultiOgar|OgarII/.test(reader.getStringUTF8()) || stats.pingLoopId) break;
     // stats.pingLoopId = setInterval(() => {

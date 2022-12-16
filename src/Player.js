@@ -94,6 +94,7 @@ class Player {
         this._nameUtf8 = writer.toBuffer();
     }
     setSkin(skin) {
+        skin = skin || "";
         this._skin = skin;
         var writer = new BinaryWriter();
         writer.writeStringZeroUtf8(skin);
@@ -113,14 +114,22 @@ class Player {
         return Math.max(scale, this.server.config.serverMinScale)
     }
     joinGame(name, skin) {
-        if (this.cells.length) return;
-        if (skin) this.setSkin(skin);
+        var client = this.socket.client;
         if (!name) name = "";
+        if (this.cells.length) {
+            this.setSkin(skin);
+            this.setName(name);
+            let cells = this.clientNodes.filter(i => i.type === 0);
+            client.sendPacket(new Packet.UpdateNodes(this, [], [], [], cells));
+            setTimeout(() => client.sendPacket(new Packet.UpdateNodes(this, cells, [], [], [])), 1)
+            return;
+        }
+
+        this.setSkin(skin);
         this.setName(name);
         this.spectate = false;
         this.freeRoam = false;
         this.spectateTarget = null;
-        var client = this.socket.client;
         if (!this.isMi && this.socket.isConnected != null) {
             // some old clients don't understand ClearAll message
             // so we will send update for them

@@ -59,7 +59,7 @@ export function sendMouseMove(x, y) {
   send(writer);
 }
 
-export function sendPlay(name) {
+export function sendPlay(name = "") {
   const writer = new BufferWriter(true);
   writer.setUint8(0x00);
   writer.setStringUTF8(name);

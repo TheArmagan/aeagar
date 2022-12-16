@@ -4,12 +4,12 @@ const ReadLine = require("readline");
 const addToProto = (obj, name, func) => {
     if (!obj.prototype[name]) obj.prototype[name] = func;
 };
-addToProto(Array, "removeSorted", function(item) {
+addToProto(Array, "removeSorted", function (item) {
     const index = this.indexOf(item);
     if (index != -1) this.splice(index, 1);
     return this;
 });
-addToProto(Array, "removeUnsorted", function(item, index = this.indexOf(item)) {
+addToProto(Array, "removeUnsorted", function (item, index = this.indexOf(item)) {
     if (index == this.length - 1) this.pop();
     else if (index != -1) this[index] = this.pop();
     return this;
@@ -33,5 +33,5 @@ Logger.info(`Running MultiOgarII ${instance.version}, a FOSS agar.io server impl
 // Catch console input.
 inputInterface.on("line", (input) => {
     const args = input.toLowerCase().split(" ");
-    if(Commands[args[0]]) Commands[args[0]](instance, args);
+    if (Commands[args[0]]) Commands[args[0]](instance, args);
 });

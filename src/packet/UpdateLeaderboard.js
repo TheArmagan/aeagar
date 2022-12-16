@@ -15,13 +15,22 @@ class UpdateLeaderboard {
     }
     build(protocol) {
         switch (this.leaderboardType) {
-            case 48:
+            case 0x30:
                 // UserText
-                if (protocol < 11)
-                    return this.buildUserText(protocol);
-                else
-                    return this.buildUserText14();
-            case 49:
+                // if (protocol < 11)
+                //     return this.buildUserText(protocol);
+                // else
+                // return this.buildUserText14();
+                var writer = new BinaryWriter();
+                // writeCount(writer, 0x30, 1);
+                writer.writeUInt8(0x30);
+                writer.writeUInt32(this.leaderboard.length);
+                for (var i = 0; i < this.leaderboard.length; i++) {
+                    if (!Array.isArray(this.leaderboard[i])) this.leaderboard[i] = [this.leaderboard[i], "fff"];
+                    writer.writeStringZeroUtf8(JSON.stringify(this.leaderboard[i]));
+                }
+                return writer.toBuffer();
+            case 0x31:
                 // FFA
                 if (protocol < 6)
                     return this.buildFfa5();
@@ -29,7 +38,7 @@ class UpdateLeaderboard {
                     return this.buildFfa6();
                 else
                     return this.buildFfa(protocol); // 13/14
-            case 50:
+            case 0x32:
                 // Team
                 return this.buildTeam();
             default:

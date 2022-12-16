@@ -1,4 +1,4 @@
-module.exports = Object.seal({
+module.exports = {
   // MultiOgarII configurations file
   // Lines starting with // are comments
 
@@ -42,10 +42,10 @@ module.exports = Object.seal({
   "serverPort": 6780,
   "serverBind": "0.0.0.0",
   "serverTracker": 0,
-  "serverGamemode": 4,
+  "serverGamemode": 0,
   "serverBots": 0,
-  "serverViewBaseX": 2048,
-  "serverViewBaseY": 2048,
+  "serverViewBaseX": 1080,
+  "serverViewBaseY": 1080,
   "serverMinScale": 0.15,
   "serverSpectatorScale": 0.4,
   "serverStatsPort": 6779,
@@ -100,7 +100,7 @@ module.exports = Object.seal({
   // foodAmount: The number of food to spawn
   // foodMassGrow: Enable food mass grow ?
   "foodMinSize": 5,
-  "foodMaxSize": 10,
+  "foodMaxSize": 20,
   "foodAmount": 8000,
   "foodMassGrow": 1,
 
@@ -160,7 +160,7 @@ module.exports = Object.seal({
   "playerMinEjectSize": 59.16079783,
   "playerStartSize": 31.6227766017,
   "playerMaxCells": 24,
-  "playerSpeed": 1.5,
+  "playerSpeed": 3,
   "playerDecayRate": 0.002,
   "playerDecayCap": 0,
   "playerRecombineTime": 30,
@@ -198,4 +198,4 @@ module.exports = Object.seal({
   "tourneyEndTime": 30,
   "tourneyTimeLimit": 20,
   "tourneyLeaderboardToggleTime": 0
-})
+};

@@ -47,13 +47,20 @@ const commands = [
         }
         send(player, "You killed yourself");
     }),
-    new Command("skin", "change skin", "[skin]", UserRoleEnum.GUEST, (player, args) => {
-        if (player.cells.length)
-            return send(player, "ERROR: Cannot change skin while in game!");
-        const skinName = args[1] || "";
-        player.setSkin(skinName);
-        send(player, `Your skin ${skinName ? "set to " + skinName : "was removed"}`);
-    }),
+    // new Command("skin", "change skin", "[skin]", UserRoleEnum.GUEST, (player, args) => {
+    //     // if (player.cells.length)
+    //     //     return send(player, "ERROR: Cannot change skin while in game!");
+    //     const skinName = args[1] || "";
+    //     player.setSkin(skinName);
+    //     send(player, `Your skin ${skinName ? "set to " + skinName : "was removed"}`);
+    // }),
+    // new Command("name", "change name", "[name]", UserRoleEnum.GUEST, (player, args) => {
+    //     // if (player.cells.length)
+    //     //     return send(player, "ERROR: Cannot change skin while in game!");
+    //     const name = args.join(" ") || "";
+    //     player.setName(name);
+    //     send(player, `Your name ${name ? "set to " + name : "was removed"}`);
+    // }),
     new Command("login", "upgrade your credential to access more commands", "<password>", UserRoleEnum.GUEST, (player, args) => {
         let pass = args[1];
         if (!pass || !(pass = pass.trim()))

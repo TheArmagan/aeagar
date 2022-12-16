@@ -1,4 +1,4 @@
-import { PI_2, QUAD_TREE_MAX_POINTS } from "./constants.js";
+import { EMPTY_NAME, PI_2, QUAD_TREE_MAX_POINTS } from "./constants.js";
 import { Color } from "./lib/Color.js";
 import { PointQuadTree } from "./lib/Quad.js";
 import { prettyPrintTime, vec2Distance } from "./lib/utils.js";
@@ -304,17 +304,20 @@ export function drawLeaderBoard() {
   const canvas = leaderBoard.canvas;
   const ctx = canvas.getContext('2d');
 
-  canvas.width = 200;
-  canvas.height = leaderBoard.type !== 'pie' ? 60 + 24 * leaderBoard.items.length : 240;
 
+  canvas.width = 200;
+  canvas.height = leaderBoard.type == 'pie' ? 240 : leaderBoard.type == 'text' ? 24 * leaderBoard.items.length : 60 + 24 * leaderBoard.items.length;
   ctx.globalAlpha = .4;
   ctx.fillStyle = '#000';
-  ctx.fillRect(0, 0, 200, canvas.height);
 
+  ctx.fillRect(0, 0, 200, canvas.height);
   ctx.globalAlpha = 1;
   ctx.fillStyle = '#FFF';
   ctx.font = '30px Ubuntu';
-  ctx.fillText('Sıralama', 100 - ctx.measureText('Sıralama').width / 2, 40);
+
+  if (leaderBoard.type != 'text') {
+    ctx.fillText('Sıralama', 100 - ctx.measureText('Sıralama').width / 2, 40);
+  }
 
   if (leaderBoard.type === 'pie') {
     let last = 0;
@@ -329,19 +332,26 @@ export function drawLeaderBoard() {
   } else {
     ctx.font = '20px Ubuntu';
     for (let i = 0; i < leaderBoard.items.length; i++) {
-      let isMe = false;
+      let color = '#fff';
       let text;
       if (leaderBoard.type === "text") {
-        text = leaderBoard.items[i];
+        text = leaderBoard.items[i][0];
+        color = "#" + (leaderBoard.items[i][1] || 'fff');
       } else {
-        text = leaderBoard.items[i].name,
-          isMe = leaderBoard.items[i].me;
+        text = leaderBoard.items[i].name;
+        color = leaderBoard.items[i].me ? '#FAA' : "#fff";
       }
-      if (leaderBoard.type === 'ffa') text = `${i + 1}. ${text}`;
-      ctx.fillStyle = isMe ? '#FAA' : '#FFF';
-      const width = ctx.measureText(text).width;
-      const start = width > 200 ? 2 : 100 - width * 0.5;
-      ctx.fillText(text, start, 70 + 24 * i);
+      ctx.fillStyle = color;
+      if (leaderBoard.type === 'ffa') {
+        text = `${i + 1}. ${text}`;
+        const width = ctx.measureText(text).width;
+        const start = width > 200 ? 2 : 100 - width * 0.5;
+        ctx.fillText(text, start, 70 + 24 * i);
+      } else {
+        const width = ctx.measureText(text).width;
+        const start = width > 200 ? 2 : 100 - width * 0.5;
+        ctx.fillText(text, start, 20 + 24 * i);
+      }
     }
   }
 }
@@ -519,7 +529,7 @@ function drawGame() {
   for (const cell of drawList) {
     let distance = vec2Distance(cell.x, cell.y, camera.x, camera.y);
 
-    if ((distance < ((2048 / __scale / 2))) || cells.mine.includes(cell.id)) cell.draw(mainCtx);
+    if (cells.mine.includes(cell.id) || (distance < ((1080 / __scale / 2)))) cell.draw(mainCtx);
     // console.log(stats.scale)
   }
 

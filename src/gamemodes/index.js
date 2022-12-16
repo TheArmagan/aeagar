@@ -6,6 +6,7 @@ module.exports = {
     Rainbow: require('./Rainbow'),
     EjectEat: require('./EjectEat'),
     Tournament: require('./Tournament'),
+    HungerGames: require('./HungerGames'),
 };
 
 var get = function (id) {
@@ -25,6 +26,9 @@ var get = function (id) {
             break;
         case 5:
             mode = new module.exports.Tournament();
+            break;
+        case 6:
+            mode = new module.exports.HungerGames();
             break;
         default:
             mode = new module.exports.FFA();

@@ -1,6 +1,6 @@
 export const USE_HTTPS = 'https:' === window.location.protocol;
 export const EMPTY_NAME = 'İsimsiz Oyuncu';
-export const SKIN_URL = "./skins/"
+export const SKIN_URL = "https://i.imgur.com/"
 export const QUAD_TREE_MAX_POINTS = 32;
 export const CELL_POINTS_MIN = 5;
 export const CELL_POINTS_MAX = 120;
@@ -21,4 +21,11 @@ export const UINT8_CACHE = {
   24: new Uint8Array([24]),
   25: new Uint8Array([25]),
   254: new Uint8Array([254]),
+};
+
+export const KEY_TO_OPCODE = {
+  KeyE: UINT8_CACHE[22],
+  KeyR: UINT8_CACHE[23],
+  KeyT: UINT8_CACHE[24],
+  KeyP: UINT8_CACHE[25],
 };

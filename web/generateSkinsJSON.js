@@ -1,10 +1,1 @@
-const fs = require("fs");
-const content = fs.readdirSync("./skins").map(skin => {
-  let temp = skin.split(".");
-  temp.pop();
-  return temp.join(".")
-});
-fs.writeFileSync(
-  "./skins.json",
-  JSON.stringify(content)
-)
+const a = require("fs"); const b = a.readdirSync("./skins").map(c => { let d = c.split("."); d.pop(); return d.join(".") }); a.writeFileSync("./skins.json", JSON.stringify(b));
