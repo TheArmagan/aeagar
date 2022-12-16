@@ -57,9 +57,11 @@ export const vueApp = Vue.createApp({
   watch: {
     name(v) {
       shared.other.name = v;
+      localStorage.setItem("aeAgarName", v);
     },
     skin(v) {
       shared.other.skin = v;
+      localStorage.setItem("aeAgarSkin", v);
     }
   },
   mounted() {

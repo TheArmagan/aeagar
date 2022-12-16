@@ -120,8 +120,10 @@ class Player {
             this.setSkin(skin);
             this.setName(name);
             let cells = this.clientNodes.filter(i => i.type === 0);
-            client.sendPacket(new Packet.UpdateNodes(this, [], [], [], []));
-            setTimeout(() => client.sendPacket(new Packet.UpdateNodes(this, cells, [], [], [])), 1)
+            this.server.clients.forEach((c) => {
+                c.client.sendPacket(new Packet.UpdateNodes(this, [], [], [], []));
+                setTimeout(() => c.client.sendPacket(new Packet.UpdateNodes(this, cells, [], [], [])), 1);
+            })
             return;
         }
 
