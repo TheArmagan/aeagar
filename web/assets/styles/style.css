@@ -32,7 +32,7 @@ canvas {
   height: 100vh;
 }
 
-#wrapper .chat-text-box {
+#wrapper .chat-input {
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
   position: absolute;
@@ -50,12 +50,12 @@ canvas {
   font-family: "Ubuntu";
 }
 
-#wrapper .chat-text-box.disabled {
+#wrapper .chat-input.disabled {
   opacity: 0.25;
   pointer-events: none;
 }
 
-#wrapper .chat-text-box:focus {
+#wrapper .chat-input:focus {
   opacity: 1;
 }
 

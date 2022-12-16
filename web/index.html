@@ -15,7 +15,7 @@
     <canvas></canvas>
     <div id="app">
         <div id="wrapper">
-            <input class="chat-text-box" type="text" autocomplete="off" spellcheck="false" placeholder="Sohbet.."
+            <input class="chat-input" type="text" autocomplete="off" spellcheck="false" placeholder="Sohbet.."
                 @blur="onChatBlur" @focus="onChatFocus" @keydown="onChatKeyDown" maxlength="200" />
             <div class="backdrop-content" :class="{'visible': isESCOverlayVisible}">
                 <div class="centered">

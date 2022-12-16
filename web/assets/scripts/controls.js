@@ -6,9 +6,8 @@ import { shared } from "./shared.js";
 const { camera, border, cells, chat, leaderBoard, stats, other, settings } = shared;
 
 export function onDie() {
-  console.log(cells.mine)
-  if (!(Date.now() - other.lastPlayAt > 1000)) internalVueApp.isESCOverlayVisible = true;
-  console.log("onDie");
+  console.log(cells);
+  internalVueApp.isESCOverlayVisible = true;
 }
 
 let wInterval;

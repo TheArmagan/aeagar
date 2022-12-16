@@ -32,7 +32,10 @@ export const vueApp = Vue.createApp({
     },
     onKeyDown(e) {
       if (e.code == "Escape") this.isESCOverlayVisible = !this.isESCOverlayVisible;
-      if (!this.isESCOverlayVisible) onKeyDown(e);
+      if (!this.isESCOverlayVisible) {
+        onKeyDown(e);
+        if (e.code == "Enter") document.querySelector(".chat-input").focus();
+      }
     },
     onKeyUp(e) {
       onKeyUp(e);

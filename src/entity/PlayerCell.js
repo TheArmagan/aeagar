@@ -26,6 +26,7 @@ class PlayerCell extends Cell {
     }
     onRemove(server) {
         this.owner.cells.removeUnsorted(this);
+        this.owner.socket.client.__nickname = Date.now();
         this.server.nodesPlayer.removeUnsorted(this);
 
         server.mode.onCellRemove(this);

@@ -47,7 +47,7 @@ export class Cell {
     cells.byId.delete(this.id);
     if (cells.mine.remove(this.id)) {
       setTimeout(() => {
-        if (!cells.mine.length) onDie(this);
+        if (cells.mine.length == 0) onDie(this);
       }, 100)
     }
     this.destroyed = true;
