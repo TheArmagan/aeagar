@@ -68,7 +68,7 @@ module.exports = {
   "separateChatForTeams": 0,
   "serverName": "OgarBL #1",
   "serverWelcomes": [
-    "Oblivion için özel olan AgarIO sunucusuna hoşgeldiniz.",
+    "Armağan'ın özel AgarIO sunucusuna hoşgeldiniz!",
     "discord.gg/obl"
   ],
   // "serverWelcome1": "Oblivion için özel olan AgarIO sunucusuna hoşgeldiniz.",
