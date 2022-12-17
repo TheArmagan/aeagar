@@ -31,6 +31,9 @@ export function onKeyDown(e) {
   }
 }
 
+export function onMouseMove(e) {
+
+}
 
 export function onKeyUp(e) {
   switch (e.code) {
@@ -45,7 +48,32 @@ export function onKeyUp(e) {
 export function onWheel(e) {
   camera.userZoom *= e.deltaY > 0 ? 0.8 : 1.2;
   camera.userZoom = Math.max(camera.userZoom, settings.moreZoom ? 0.05 : 1);
-  camera.userZoom = Math.min(camera.userZoom, 4 );
+  camera.userZoom = Math.min(camera.userZoom, 4);
+}
+
+export function onTouchStart(e) {
+  if (e.target.classList.contains("mobile-btn")) {
+    if (e.target.classList.contains("menu")) internalVueApp.isESCOverlayVisible = true;
+    if (e.target.classList.contains("split")) send(UINT8_CACHE[17]);
+    if (e.target.classList.contains("eject")) send(UINT8_CACHE[21]);
+    return;
+  }
+  if (!internalVueApp.isESCOverlayVisible) {
+    internalVueApp.isTouching = true;
+    onTouchMove(e);
+  }
+}
+
+export function onTouchMove(e) {
+  if (internalVueApp.isESCOverlayVisible) return;
+  const touch = e.touches[0];
+  other.mouseX = touch.pageX;
+  other.mouseY = touch.pageY;
+  internalVueApp.touchCirclePosition = { x: other.mouseX - (innerWidth * .02), y: other.mouseY - (innerWidth * .02) };
+}
+
+export function onTouchEnd(e) {
+  if (!e.touches.length) internalVueApp.isTouching = false;
 }
 
 setInterval(() => {

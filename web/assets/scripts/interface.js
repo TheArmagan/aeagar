@@ -1,6 +1,7 @@
 import * as Vue from "https://unpkg.com/vue@3/dist/vue.esm-browser.js";
 import * as connection from "./connection.js";
-import { onKeyDown, onKeyUp, onWheel } from "./controls.js";
+import { UINT8_CACHE } from "./constants.js";
+import { onKeyDown, onKeyUp, onMouseMove, onTouchEnd, onTouchMove, onTouchStart, onWheel } from "./controls.js";
 import { drawChat } from "./game.js";
 import { shared } from "./shared.js";
 const { camera, border, cells, chat, leaderBoard, stats, other, settings } = shared;
@@ -12,7 +13,9 @@ export const vueApp = Vue.createApp({
       shared,
       isESCOverlayVisible: true,
       skin: shared.other.skin,
-      name: shared.other.name
+      name: shared.other.name,
+      isTouching: shared.other.isTouching,
+      touchCirclePosition: { x: 0, y: 0 }
     }
   },
   methods: {
@@ -34,6 +37,7 @@ export const vueApp = Vue.createApp({
       }
     },
     onKeyDown(e) {
+      other.pressedKeys.add(e.code);
       if (other.isTyping) return;
       if (e.code == "Escape") this.isESCOverlayVisible = !this.isESCOverlayVisible;
       if (!this.isESCOverlayVisible) {
@@ -42,6 +46,7 @@ export const vueApp = Vue.createApp({
       }
     },
     onKeyUp(e) {
+      other.pressedKeys.delete(e.code);
       onKeyUp(e);
     },
     onWheel(e) {
@@ -56,6 +61,18 @@ export const vueApp = Vue.createApp({
       other.lastPlayAt = Date.now();
       connection.sendSpectate();
       this.isESCOverlayVisible = false;
+    },
+    onTouchMove(e) {
+      onTouchMove(e);
+    },
+    onTouchStart(e) {
+      onTouchStart(e);
+    },
+    onTouchEnd(e) {
+      onTouchEnd(e);
+    },
+    onMouseMove(e) {
+      onMouseMove(e);
     }
   },
   watch: {
@@ -66,29 +83,21 @@ export const vueApp = Vue.createApp({
     skin(v) {
       shared.other.skin = v;
       localStorage.setItem("aeAgarSkin", v);
+    },
+    isTouching(v) {
+      shared.other.isTouching = v;
     }
   },
   mounted() {
     internalVueApp = this;
 
-    window.addEventListener("mousemove", (e) => {
-      other.mouseX = e.x;
-      other.mouseY = e.y;
-    });
-
-    window.addEventListener("keydown", (e) => {
-      other.pressedKeys.add(e.code);
-      this.onKeyDown(e);
-    });
-
-    window.addEventListener("keyup", (e) => {
-      other.pressedKeys.delete(e.code);
-      this.onKeyUp(e);
-    });
-
-    window.addEventListener("wheel", (e) => {
-      this.onWheel(e);
-    }, { passive: true });
+    window.addEventListener("keydown", this.onKeyDown);
+    window.addEventListener("keyup", this.onKeyUp);
+    window.addEventListener("mousemove", this.onMouseMove);
+    window.addEventListener("wheel", this.onWheel, { passive: true });
+    window.addEventListener('touchmove', this.onTouchMove);
+    window.addEventListener('touchstart', this.onTouchStart);
+    window.addEventListener('touchend', this.onTouchEnd);
   }
 });
 

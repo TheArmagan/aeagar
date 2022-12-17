@@ -13,7 +13,8 @@ export let shared = {
     lastPlayAt: 0,
     blackListedSkins: [
       "13231"
-    ]
+    ],
+    isTouching: false
   },
   cells: {
     list: [],
