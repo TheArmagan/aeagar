@@ -82,10 +82,12 @@ canvas {
   width: 8vw;
   height: 8vw;
   border-radius: 50%;
-  background: rgba(40, 40, 40, 0.6);
+  background: rgba(200, 200, 200, 0.6);
   opacity: 0.5;
   position: absolute;
   z-index: -1;
+  -webkit-filter: invert(1);
+          filter: invert(1);
 }
 
 #wrapper .control-btn.split {
