@@ -11,7 +11,7 @@
   },
   "scripts": {
     "start:game": "cd src && node .",
-    "start:web": "cd web && node generateSkinsJSON.js && npx http-server -p 6680 -c-1"
+    "start:web": "cd web && npx http-server -p 6680 -c-1"
   },
   "repository": {
     "type": "git",
