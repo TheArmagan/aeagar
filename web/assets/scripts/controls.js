@@ -32,7 +32,9 @@ export function onKeyDown(e) {
 }
 
 export function onMouseMove(e) {
-
+  if (internalVueApp.isESCOverlayVisible) return;
+  other.mouseX = e.x;
+  other.mouseY = e.y;
 }
 
 export function onKeyUp(e) {
