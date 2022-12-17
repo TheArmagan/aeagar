@@ -6,6 +6,7 @@ export const CELL_POINTS_MIN = 5;
 export const CELL_POINTS_MAX = 120;
 export const VIRUS_POINTS = 100;
 export const PI_2 = Math.PI * 2;
+export const WS_SERVER = "aeagar-ws1.armagan.rest";
 
 export const SEND_254 = new Uint8Array([254, 6, 0, 0, 0]);
 export const SEND_255 = new Uint8Array([255, 1, 0, 0, 0]);
