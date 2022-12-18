@@ -114,12 +114,12 @@ module.exports = {
   // motherCellMaxMass: Maximum amount of mass a mothercell is allowed to have (0 for no limit)
   // virusVelocity: Velocity of moving viruses (speed and distance)
   // virusMaxCells: Maximum cells a player is allowed to have from virus splits (0 for playerMaxCells)
-  "virusMinSize": 60,
+  "virusMinSize": 80,
   "virusMaxSize": 100,
-  "virusMaxPoppedSize": 60,
+  "virusMaxPoppedSize": 80,
   "virusEqualPopSize": 1,
-  "virusAmount": 20,
-  "virusMaxAmount": 100,
+  "virusAmount": 50,
+  "virusMaxAmount": 150,
   "motherCellMaxMass": 0,
   "virusVelocity": 780,
   "virusMaxCells": 0,
@@ -133,7 +133,7 @@ module.exports = {
   // ejectVelocity: Velocity of ejecting cells (speed and distance)
   "ejectSize": 36.06,
   "ejectSizeLoss": 42.43,
-  "ejectCooldown": 3,
+  "ejectCooldown": 1,
   "ejectSpawnPercent": 0.5,
   "ejectVirus": 0,
   "ejectVelocity": 1400,
@@ -154,13 +154,13 @@ module.exports = {
   // playerDecayCap: Maximum mass a cell can have before it's decayrate multiplies by 10. (0 to disable)
   // playerDisconnectTime: Time in seconds before a disconnected player's cell is removed from the server (Set to -1 to never remove)
   // splitVelocity: Velocity of splitting playercells (speed and distance)
-  "playerMinSize": 50,
-  "playerMaxSize": 135000,
+  "playerMinSize": 10,
+  "playerMaxSize": 255000,
   "playerMinSplitSize": 35,
   "playerMinEjectSize": 35,
   "playerStartSize": 100,
   "playerMaxCells": 16,
-  "playerSpeed": 3,
+  "playerSpeed": 2,
   "playerDecayRate": 0.002,
   "playerDecayCap": 0,
   "playerRecombineTime": 30,
