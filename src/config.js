@@ -155,13 +155,13 @@ module.exports = {
   // playerDisconnectTime: Time in seconds before a disconnected player's cell is removed from the server (Set to -1 to never remove)
   // splitVelocity: Velocity of splitting playercells (speed and distance)
   "playerMinSize": 10,
-  "playerMaxSize": 255000,
+  "playerMaxSize": 1_000_000_000,
   "playerMinSplitSize": 35,
   "playerMinEjectSize": 35,
   "playerStartSize": 100,
   "playerMaxCells": 16,
   "playerSpeed": 2,
-  "playerDecayRate": 0.002,
+  "playerDecayRate": 0.01,
   "playerDecayCap": 0,
   "playerRecombineTime": 30,
   "playerMaxNickLength": 30,
