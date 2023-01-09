@@ -69,10 +69,8 @@ module.exports = {
   "serverName": "OgarBL #1",
   "serverWelcomes": [
     "Armağan'ın özel AgarIO sunucusuna hoşgeldiniz!",
-    "discord.gg/obl"
+    "discord.gg/acord"
   ],
-  // "serverWelcome1": "Oblivion için özel olan AgarIO sunucusuna hoşgeldiniz.",
-  // "serverWelcome2": "discord.gg/obl",
   "clientBind": "",
 
   // [ANTI-BOT]
