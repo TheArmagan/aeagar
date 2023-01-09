@@ -42,7 +42,7 @@ module.exports = {
   "serverPort": 6780,
   "serverBind": "0.0.0.0",
   "serverTracker": 0,
-  "serverGamemode": 0,
+  "serverGamemode": 4,
   "serverBots": 0,
   "serverViewBaseX": 1920,
   "serverViewBaseY": 1080,
