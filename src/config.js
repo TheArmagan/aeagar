@@ -89,8 +89,8 @@ module.exports = {
 
   // [BORDER]
   // Border size (vanilla 14142.135623730952)
-  "borderWidth": 32000,
-  "borderHeight": 32000,
+  "borderWidth": 14142,
+  "borderHeight": 14142,
 
   // [FOOD]
   // foodMinSize: vanilla 10 (mass: 10*10/100: 1 mass)
